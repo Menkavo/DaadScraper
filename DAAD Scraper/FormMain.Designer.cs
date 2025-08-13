@@ -28,32 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            BtnStart = new Button();
+            TxtSource = new TextBox();
+            BtnNext = new Button();
+            LblCount = new Label();
+            TxtIndex = new TextBox();
             SuspendLayout();
             // 
-            // button1
+            // BtnStart
             // 
-            button1.Location = new Point(168, 118);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            BtnStart.Location = new Point(12, 415);
+            BtnStart.Name = "BtnStart";
+            BtnStart.Size = new Size(75, 23);
+            BtnStart.TabIndex = 0;
+            BtnStart.Text = "Start";
+            BtnStart.UseVisualStyleBackColor = true;
+            BtnStart.Click += BtnStart_Click;
+            // 
+            // TxtSource
+            // 
+            TxtSource.AccessibleRole = AccessibleRole.OutlineButton;
+            TxtSource.Location = new Point(12, 73);
+            TxtSource.Multiline = true;
+            TxtSource.Name = "TxtSource";
+            TxtSource.Size = new Size(575, 336);
+            TxtSource.TabIndex = 1;
+            // 
+            // BtnNext
+            // 
+            BtnNext.Location = new Point(512, 415);
+            BtnNext.Name = "BtnNext";
+            BtnNext.Size = new Size(75, 23);
+            BtnNext.TabIndex = 3;
+            BtnNext.Text = "Next";
+            BtnNext.UseVisualStyleBackColor = true;
+            BtnNext.Click += BtnNext_Click;
+            // 
+            // LblCount
+            // 
+            LblCount.AutoSize = true;
+            LblCount.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblCount.Location = new Point(65, 38);
+            LblCount.Name = "LblCount";
+            LblCount.Size = new Size(63, 25);
+            LblCount.TabIndex = 4;
+            LblCount.Text = "label1";
+            // 
+            // TxtIndex
+            // 
+            TxtIndex.AccessibleRole = AccessibleRole.OutlineButton;
+            TxtIndex.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtIndex.Location = new Point(12, 34);
+            TxtIndex.Name = "TxtIndex";
+            TxtIndex.Size = new Size(47, 33);
+            TxtIndex.TabIndex = 5;
+            TxtIndex.KeyDown += TxtIndex_KeyDown;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            ClientSize = new Size(599, 450);
+            Controls.Add(TxtIndex);
+            Controls.Add(LblCount);
+            Controls.Add(BtnNext);
+            Controls.Add(TxtSource);
+            Controls.Add(BtnStart);
             Name = "FormMain";
             Text = "Form1";
+            Load += FormMain_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
+        private Button BtnStart;
+        private TextBox TxtSource;
+        private Button BtnNext;
+        private Label LblCount;
+        private TextBox TxtIndex;
     }
 }

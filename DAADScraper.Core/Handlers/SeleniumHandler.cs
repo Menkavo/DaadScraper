@@ -13,9 +13,9 @@ namespace DAADScraper.Core.Handlers
         public SeleniumHandler()
         {
             var options = new ChromeOptions();
-            //options.AddArgument("--headless=new");
-            //options.AddArgument("--no-sandbox");
-            //options.AddArgument("--disable-gpu");
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-gpu");
             Driver = new ChromeDriver();
             Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(100));
         }
@@ -27,7 +27,11 @@ namespace DAADScraper.Core.Handlers
 
         public void ClickItemWithXPath(string xPath) => Wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xPath))).Click();
 
+        public void ClickItemWithId(string id) => Wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(id))).Click();
+
         public string GetTextByXPath(string xPath) => Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xPath))).Text.Trim();
+
+        public string GetTextByCssSelector(string selector) => Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(selector))).Text.Trim();
 
         public bool ElementExists(string xPath)
         {
@@ -42,7 +46,9 @@ namespace DAADScraper.Core.Handlers
             }
         }
 
-        public void WaitForElement(string xPath) => Wait.Until(ExpectedConditions.ElementExists(By.XPath(xPath)));
+        public void WaitForElementWithXPath(string xPath) => Wait.Until(ExpectedConditions.ElementExists(By.XPath(xPath)));
+
+        public void WaitForElementWithCssSelector(string selector) => Wait.Until(ExpectedConditions.ElementExists(By.CssSelector(selector)));
 
         public string GetAttributeByXPath(string xPath, string attribute) => Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xPath))).GetAttribute(attribute);
 
@@ -55,6 +61,18 @@ namespace DAADScraper.Core.Handlers
 
             //return Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(xPath)));
         }
+
+        public IReadOnlyCollection<IWebElement> GetElementsByCssSelector(string cssSelector)
+        {
+            var elements = Driver.FindElements(By.CssSelector(cssSelector));
+            if (elements == null)
+                Console.WriteLine($"Element doesn't exist. XPath : {cssSelector}");
+            return elements;
+
+            //return Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(xPath)));
+        }
+
+        public void ScrollToTheEnd() => ((IJavaScriptExecutor)Driver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
 
         public void Dispose() => Driver.Quit();
     }
